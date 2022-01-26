@@ -30,10 +30,16 @@ public:
 	}
 	void drawSnake(int x, int y, int* xt, int* yt, int size, int lastTailX, int lastTailY, direction path)
 	{
-		location[y][x] = { '0' };
-		for (int i = size; i >= 0; i--)
+//		location[y][x] = { '0' };
+		for (int i = 0; i <= size; i++)
 		{
-			location[yt[i]][xt[i]] = { '0' };
+			if (i == size) {
+				location[yt[i]][xt[i]] = { '0' };
+			}
+			else {
+				location[yt[i]][xt[i]] = { 'o' };
+			}
+			
 		}
 		if (path != STOP) {
 			location[lastTailY][lastTailX] = { ' ' };
@@ -139,9 +145,11 @@ public:
 			x++;
 			break;
 		}
-
-		lastTailX = xt[0];
-		lastTailY = yt[0];
+		if (!needSkip) {
+			lastTailX = xt[0];
+			lastTailY = yt[0];
+		}
+		needSkip = false;
 
 		for (int i = 0; i < size + 1; i++)
 		{
@@ -167,6 +175,7 @@ public:
 			xt[i] = xt[i - 1];
 			yt[i] = yt[i - 1];
 		}
+		needSkip = true;
 
 	}
 	~Snake() {

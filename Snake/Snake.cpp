@@ -24,6 +24,8 @@ void gameLogic() {
     while (!gameOver) {
         system("cls");
         snake.move(direct);
+        
+
         if (map.location[snake.y][snake.x] == '#' || snake.die) {
             gameOver = true;
             break;
@@ -37,9 +39,10 @@ void gameLogic() {
             }
             score++;
         }
-
+        
         map.drawSnake(snake.x, snake.y, snake.xt, snake.yt, snake.size, snake.lastTailX, snake.lastTailY, direct);
-        cout << *map.location;
+        cout << *map.location << endl << "****YOUR SCORE: " << score << "****";
+
         this_thread::sleep_for(chrono::milliseconds(slowLevel));
 
     }
